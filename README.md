@@ -1,24 +1,37 @@
-# jinshan_front
+# 金山商城客户端
 
-## Project setup
+### 安装
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### PS
+
+项目结构已搭建好，页面交互和跳转已经写好，完成页面HTML和CSS部分就行(Views里面各个页面)
+
+完成后
+
 ```
-npm run build
+git add . 添加
+git commit -m "[add]xxx(姓名) xxxxxx(其他信息)"
+git push origin master 提交到远程仓库
 ```
 
-### Lints and fixes files
+
+
+## 常用git命令
+
 ```
-npm run lint
+git仓库初始化：git init
+创建分支：git checkout -b <分支名>
+合并分支：git merge <分支名>
+推代码之前先：git pull origin <分支名> --rebase
+挑选某次提交：git cherry-pick <提交ID>
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
