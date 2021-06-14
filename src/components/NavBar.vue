@@ -25,7 +25,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 40px;
+  height: 45px;
   background: #F50D10;
   button{
     height: 100%;

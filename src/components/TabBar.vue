@@ -11,9 +11,9 @@
           'iconfont',
            item.class
         ]"
-        :style="{color:currentSelect==index?'#DB0E0F':''}"
+        :style="{color:$route.path==item.to?'#DB0E0F':''}"
       ></i>
-      <span :style="{color:currentSelect==index?'#DB0E0F':''}">{{ item.text }}</span>
+      <span :style="{color:$route.path==item.to?'#DB0E0F':''}">{{ item.text }}</span>
     </div>
   </div>
 </template>
@@ -27,27 +27,25 @@ export default {
         {
           text: "商城",
           class: "icon-gouwu",
-          to: "Shopping",
+          to: "/shopping",
         },
         {
           text: "购物车",
           class: "icon-gouwuche",
-          to: "Cart",
+          to: "/cart",
         },
         {
           text: "个人",
           class: "icon-geren",
-          to: "User",
+          to: "/user",
         },
       ],
     };
   },
   methods: {
-    handleChoose(index,name) {
+    handleChoose(index,path) {
       this.currentSelect = index;
-      this.$router.push({
-        name
-      })
+      this.$router.push(path)
     },
   },
 };

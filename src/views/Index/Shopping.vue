@@ -1,8 +1,8 @@
 <template>
   <div class="shopping">
     <nav-bar :title="'618主会场'" :isReturn="false"></nav-bar>
-    <search-input :backColor="'#F50D10'" @clickSearch="handleClickSearch" @inputUpdate="handleUpdetaInput"></search-input>
-    <div class="class_swiper">轮播图</div>
+    <search-input :backColor="'transparent'" @clickSearch="handleClickSearch" @inputUpdate="handleUpdetaInput"></search-input>
+    <slider :imgList="imgList"></slider>
     <div class="div_classification">
       <div
         class="classification_item"
@@ -41,11 +41,13 @@
 <script>
 import NavBar from "../../components/NavBar.vue";
 import SearchInput from "../../components/SearchInput.vue";
+import Slider from "../../components/Slider.vue";
 export default {
   name: "Shopping",
   components: {
     NavBar,
     SearchInput,
+    Slider
   },
   data() {
     return {
@@ -120,6 +122,11 @@ export default {
           status: 1,
         },
       ],
+      imgList:[
+        "https://aecpm.alicdn.com/simba/img/TB1lUZLJVXXXXXtXFXXSutbFXXX.jpg",
+        "https://img.alicdn.com/tfs/TB1_1OLxQL0gK0jSZFtXXXQCXXa-1130-500.jpg_q100.jpg_.webp",
+        "https://img.alicdn.com/imgextra/i3/O1CN01Am8Sra21Zaice06ax_!!6000000006999-2-tps-1130-500.png_q100.jpg_.webp"
+      ]
     };
   },
   computed: {
@@ -158,11 +165,6 @@ export default {
 <style lang="less">
 .shopping {
   background-color: #f4f4f4;
-  .class_swiper {
-    background-color: green;
-    width: 100vw;
-    height: 200px;
-  }
   .div_classification {
     border-radius: 10px;
     position: relative;

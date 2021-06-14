@@ -36,25 +36,26 @@ export default {
 <style lang="less">
 .searchInput {
   position: relative;
-  padding: 5px 0 15px 0;
+  padding: 10px 0;
   display: flex;
   justify-content: center;
   .div_input {
     box-sizing: border-box;
-    width: 90%;
+    width: 95vw;
     position: relative;
     img{
       position: absolute;
       height: 18px;
       width: 18px;
       left: 10px;
-      top: 6px;
+      top: 10px;
     }
     input {
+      box-shadow: 0 0 9px 1px rgba(128, 128, 128, 0.2);
       box-sizing: border-box;
       width: 100%;
       padding-left: 40px;
-      height: 30px;
+      height: 38px;
       border-radius: 20px;
       border: none;
       outline: none;
@@ -65,10 +66,10 @@ export default {
       border: none;
       position: absolute;
       right: 10px;
-      top:4px;
+      top:5px;
       background-color: #f50d10;
       color: white;
-      padding: 3px 10px;
+      padding: 5px 10px;
       border-radius: 20px;
     }
   }
