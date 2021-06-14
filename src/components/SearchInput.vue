@@ -67,7 +67,7 @@ export default {
       position: absolute;
       right: 10px;
       top:5px;
-      background-color: #f50d10;
+      background-color: #FC4D11;
       color: white;
       padding: 5px 10px;
       border-radius: 20px;

@@ -11,9 +11,9 @@
           'iconfont',
            item.class
         ]"
-        :style="{color:$route.path==item.to?'#DB0E0F':''}"
+        :style="{color:$route.path==item.to?'#FC4D11':''}"
       ></i>
-      <span :style="{color:$route.path==item.to?'#DB0E0F':''}">{{ item.text }}</span>
+      <span :style="{color:$route.path==item.to?'#FC4D11':''}">{{ item.text }}</span>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="shopping">
     <nav-bar :title="'618主会场'" :isReturn="false"></nav-bar>
     <search-input :backColor="'transparent'" @clickSearch="handleClickSearch" @inputUpdate="handleUpdetaInput"></search-input>
-    <slider :imgList="imgList"></slider>
+    <swiper :imgList="imgList" :swiperConfigure="{width:'96vw',height:'210px'}"></swiper>
     <div class="div_classification">
       <div
         class="classification_item"
@@ -41,13 +41,14 @@
 <script>
 import NavBar from "../../components/NavBar.vue";
 import SearchInput from "../../components/SearchInput.vue";
-import Slider from "../../components/Slider.vue";
+// import Slider from "../../components/Slider.vue";
+import Swiper from '../../components/Swiper.vue'
 export default {
   name: "Shopping",
   components: {
     NavBar,
     SearchInput,
-    Slider
+    Swiper
   },
   data() {
     return {

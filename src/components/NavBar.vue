@@ -26,7 +26,7 @@ export default {
   align-items: center;
   width: 100vw;
   height: 45px;
-  background: #F50D10;
+  background: #FC4D11;
   button{
     height: 100%;
     position: absolute;
