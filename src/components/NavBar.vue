@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <button v-if="isReturn">返回</button>
+    <button v-if="isReturn" @click="handleClickReturn"><img src="../assets/back2.png" alt=""></button>
     <span>{{title}}</span>
   </div>
 </template>
@@ -14,6 +14,11 @@ export default {
     isReturn:Boolean,
   },
   components: {
+  },
+  methods:{
+    handleClickReturn(){
+      this.$router.go(-1);
+    }
   }
 }
 </script>
@@ -30,11 +35,15 @@ export default {
   button{
     height: 100%;
     position: absolute;
-    left: 20px;
+    left: 10px;
     border: none;
     outline: none;
     background: transparent;
     color: white;
+    img{
+      width: 15px;
+      height: 15px;
+    }
   }
   span{
     color: white;
