@@ -6,7 +6,7 @@ import axios from './http'
 import 'swiper/dist/css/swiper.css';
 
 Vue.config.productionTip = false
-Vue.$axios=axios
+Vue.prototype.$axios=axios
 
 new Vue({
   router,

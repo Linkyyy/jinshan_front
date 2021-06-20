@@ -37,6 +37,7 @@ export default {
 <style lang="less">
 .swiper {
   .swiper-container {
+    box-sizing: border-box;
     position: relative;
     width: 96vw;
     height: 210px;

@@ -1,9 +1,11 @@
 import axios from 'axios'
+import store from './store/index'
 
-axios.defaults.baseURL="127.0.0.1";
+axios.defaults.baseURL="http://www.hww.cool:3380";
 
 //请求拦截
 axios.interceptors.request.use(config => {
+    store.commit("setIsLoading",true);
     return config;
 }, error => {
     return Promise.reject(error)
@@ -11,16 +13,14 @@ axios.interceptors.request.use(config => {
 
 //响应拦截
 axios.interceptors.response.use(response => {
-    // endLoading();
-    // store.commit("setIsLoading",false);
-    if(response.data.stat=="ok")return response;
+    store.commit("setIsLoading",false);
+
+    if(response.data.stat=="OK")return response;
     else{
         return Promise.reject(response.data.message);
     }
 }, error => {
-    // endLoading();
-    // store.commit("setIsLoading",false);
-    console.log(error);
+    store.commit("setIsLoading",false);
     return Promise.reject(error);
 })
 

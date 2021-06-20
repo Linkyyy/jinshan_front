@@ -28,7 +28,9 @@
           />
         </div>
       </div>
-      <div class="div_forgiv"><span>{{errMsg}}</span> <span>忘了密码?</span> </div>
+      <div class="div_forgiv">
+        <span>{{ errMsg }}</span> <span>忘了密码?</span>
+      </div>
       <button @click="handleLogin">登录</button>
       <div class="div_nou">
         <span>没有账号？</span>
@@ -36,7 +38,7 @@
       </div>
     </main>
     <div class="div_bottom">
-      <input type="checkbox" v-model="isAccept"/>
+      <input type="checkbox" v-model="isAccept" />
       <span>同意</span>
       <span>《用户协议》</span>
       <span>《隐私条款》</span>
@@ -57,12 +59,12 @@ export default {
   },
   data() {
     return {
-      isAccept:false,
+      isAccept: false,
       isShowDialog: false,
       isEye: false,
       username: "",
       password: "",
-      errMsg:"",
+      errMsg: "",
     };
   },
   methods: {
@@ -77,26 +79,34 @@ export default {
       this.isShowDialog = false;
       this.isAccept = true;
     },
-    validate(){
-      let username=this.username;
-      let password=this.password;
-      return username=="test"&&password=="123456";
+    validate() {
+      return true;
     },
-    handleLogin(){
-      if(this.isAccept){
-        if(this.validate()){
-          this.$store.commit("setIsLogin",true);
-          this.$store.commit("setUserInfo",{username:'test'});
-          this.$router.push({name:"User"});
+    handleLogin() {
+      let that = this;
+      if (this.isAccept) {
+        if (this.validate()) {
+          let username = this.username;
+          let password = this.password;
+          this.$axios
+            .post("/api/user/login", {
+              username,
+              password,
+            })
+            .then((res) => {
+              let uerInfo = res.data.user;
+              that.$store.commit("setIsLogin", true);
+              that.$store.commit("setUserInfo", uerInfo);
+              that.$router.push({ name: "User" });
+            })
+            .catch((err) => {
+              that.errMsg = err;
+            });
         }
-        else{
-          this.errMsg="账号或者密码错误！";
-        }
-        
-      }else{
-        this.isShowDialog=true;
+      } else {
+        this.isShowDialog = true;
       }
-    }
+    },
   },
 };
 </script>
@@ -169,8 +179,8 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      span{
-        &:nth-child(1){
+      span {
+        &:nth-child(1) {
           color: red;
         }
       }
