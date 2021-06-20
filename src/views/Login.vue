@@ -94,9 +94,9 @@ export default {
               password,
             })
             .then((res) => {
-              let uerInfo = res.data.user;
-              that.$store.commit("setIsLogin", true);
-              that.$store.commit("setUserInfo", uerInfo);
+              let userInfo = res.data.user;
+              localStorage.setItem("isLogin",true);
+              localStorage.setItem("userInfo",JSON.stringify(userInfo))
               that.$router.push({ name: "User" });
             })
             .catch((err) => {

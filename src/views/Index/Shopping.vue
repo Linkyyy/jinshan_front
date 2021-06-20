@@ -140,9 +140,6 @@ export default {
     if(this.updateIndex>=this.goodList.length){
       return;
     }
-    console.log("---------")
-    console.log("左边："+leftWrapper.offsetHeight)
-    console.log("右边："+rightWrapper.offsetHeight)
     if(leftWrapper.offsetHeight<=rightWrapper.offsetHeight){
       
       this.goodList_left.push(this.goodList[this.updateIndex])

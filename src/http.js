@@ -1,26 +1,29 @@
 import axios from 'axios'
-import store from './store/index'
+import util from './util'
 
 axios.defaults.baseURL="http://www.hww.cool:3380";
 
 //请求拦截
 axios.interceptors.request.use(config => {
-    store.commit("setIsLoading",true);
+    util.showLoading();
     return config;
 }, error => {
+    util.showMessage(error);
     return Promise.reject(error)
 })
 
 //响应拦截
 axios.interceptors.response.use(response => {
-    store.commit("setIsLoading",false);
+    util.endLoading();
 
     if(response.data.stat=="OK")return response;
     else{
+        util.showMessage(response.data.message);
         return Promise.reject(response.data.message);
     }
 }, error => {
-    store.commit("setIsLoading",false);
+    util.endLoading();
+    util.showMessage(error);
     return Promise.reject(error);
 })
 
