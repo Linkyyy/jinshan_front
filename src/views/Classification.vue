@@ -2,7 +2,7 @@
   <div class="classification">
        <NavBar :isReturn="true" :title="'商品分类'" />
     <div class="div_items">
-      <div class="div_item" v-for="item in rows" :key="item.price">
+      <div class="div_item" v-for="item in rows" :key="item.price" @click="handleCheckDetail(item.id)">
         <img :src="item.cover" />
         <div class="div_info">
           <p class="p_title">{{ item.title }}</p>
@@ -23,9 +23,17 @@ export default {
   name: "Classification",
   created() {
     this.keyword = this.$route.query.keyword;
+    this.$axios.post('/api/cat/search',{cat:this.keyword}).then((res)=>{
+      this.rows=res.data.data
+    })
   },
     components: {
     NavBar,
+  },
+  methods:{
+    handleCheckDetail(id) {
+      this.$router.push({ name: "Detail", query: { id } });
+    },
   },
   data() {
     return {

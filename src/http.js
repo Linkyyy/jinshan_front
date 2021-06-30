@@ -1,7 +1,8 @@
 import axios from 'axios'
 import util from './util'
 
-axios.defaults.baseURL="http://www.hww.cool:3380";
+// axios.defaults.baseURL="http://www.hww.cool:3380";
+// axios.defaults.withCredentials = true
 
 //请求拦截
 axios.interceptors.request.use(config => {

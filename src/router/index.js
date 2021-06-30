@@ -6,6 +6,9 @@ import Classification from '../views/Classification'
 import Detail from '../views/Detail'
 import Search from '../views/Search'
 import Login from '../views/Login'
+import Protocol from '../views/static/Protocol'
+import Privacy from '../views/static/Privacy'
+import Favorite from '../views/Favorite'
 
 //二级路由
 import Cart from '../views/Index/Cart'
@@ -48,7 +51,11 @@ const routes = [
     name: 'Login',
     component: Login
   },
-
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    component: Favorite
+  },
   {
     path: '/classification',
     name: 'Classification',
@@ -64,11 +71,23 @@ const routes = [
     name: 'Search',
     component: Search
 
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    component: Privacy
+
+  },
+  {
+    path: '/protocol',
+    name: 'Protocol',
+    component: Protocol
+
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

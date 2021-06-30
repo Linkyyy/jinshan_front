@@ -4,17 +4,18 @@
       <h3 class="title">购物车</h3>
       <div class="delete" @click="removeItem">删除</div>
     </div>
-    <div class="total">共{{ list.rows.length }}件宝贝</div>
+    <div class="total">共{{ rows.length }}件宝贝</div>
     <div class="item_wrapper">
       <div
         class="item"
-        :class="{ active_item: list.rows[index].choose != false }"
-        v-for="(item, index) in list.rows"
+        :class="{ active_item: rows[index].choose != false }"
+        v-for="(item, index) in rows"
         :key="item.id"
+        
       >
         <div class="choose" @click="choose(index)">
           <img
-            v-if="list.rows[index].choose == false"
+            v-if="rows[index].choose == false"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAMAAAAPzWOAAAAANlBMVEVHcEzMzMzNzc3V1dXOzs7Nzc3Nzc3Nzc3Nzc3Nzc3b29vMzMz////19fXu7u7a2trk5OTR0dG06x/LAAAAC3RSTlMAN84GVqG36X8jB0no5zwAAAGJSURBVFjDrVjZtoQgDFOEqUvZ/v9nRwGvy1UHMHmdMadNWmhpmlsMsleCaJqIhOrl0JRilGr++ghSciygaP8zrDxtLsVnesAnh2bYKKwzWvMMrY2zG80vdbo+/dO78Pke2vn0Y989hiFSDIYvYVI84iEYGfW0mm+hIw3JO46Yijf8CBOT6p84LP+EvWeJHI4z4O5YIofhLJhrFhnk0JwJHYQ5qTsEX7I5Zpbg0cHpThTksstIdGdBHBfBnWQZMr29cHpLaOk5z8VYxP389X6xIDtZ2l0glitgt1DaQndPPsdQVG0gMRQVzmSqU2RVhcZU8J4r4VPxq/I6O1bckg/VyrpKS6lauRqxamW9N6s/MvSeqydxoQtVvcGryaoRb3SNyop35qz20Ctzgj3UTO9JJgwJJB2IsBCLIcUGKXtIA0KOAsihhDkeIQc15MqAXF6YaxRyoWNGC8iQgxm3IIMfZgSFDMOYsRyzIGBWFczShFnfMIskZqXFLNeYNR/04AB6+gA9wpQ+B30B3RGo3Y8v7Z8AAAAASUVORK5CYII="
             alt=""
           />
@@ -24,8 +25,9 @@
             alt=""
           />
         </div>
-        <img :src="item.cover" alt="" />
-        <div class="miaoshu">
+
+        <img @click="handleCheckDetail(item.id)" :src="item.cover" alt="" />
+        <div @click="handleCheckDetail(item.id)" class="miaoshu">
           <div class="summary">
             {{ item.title }}
           </div>
@@ -98,84 +100,35 @@ export default {
   },
   components: {},
   created() {
-    this.$axios.post("/api/cart/list").then(res=>{
-      console.log(res);
-    })
-    this.setNumber();
+    this.$axios.post("/api/cart/list").then((res) => {
+      this.rows = res.data.rows;
+      this.setNumber();
+    });
   },
   data() {
     return {
-      list: {
-        stat: "OK",
-        rows: [
-          {
-            title:
-              "欧式水果叉不绣钢水果叉子韩国家用儿童创意可爱水果叉套装甜品叉",
-            price: 33.9,
-            stock: 100,
-            cover:
-              "//gw.alicdn.com/bao/uploaded/i3/421748019/O1CN019lO2dS296kZwR8vr6_!!0-item_pic.jpg_320x320q90.jpg_.webp",
-            gallery: [
-              "//img.alicdn.com/imgextra/i3/421748019/O1CN019lO2dS296kZwR8vr6_!!0-item_pic.jpg_640x640q80_.webp",
-              "//img.alicdn.com/imgextra/i1/421748019/TB2vCc5yORnpuFjSZFCXXX2DXXa_!!421748019.jpg_640x640q80_.webp",
-              "//img.alicdn.com/imgextra/i2/421748019/TB2b2ephVXXXXavXpXXXXXXXXXX_!!421748019.jpg_640x640q80_.webp",
-            ],
-            detail: [
-              "//img.alicdn.com/imgextra/i2/421748019/O1CN01Y02seB296keSWTQ7Y_!!421748019.jpg",
-              "//img.alicdn.com/imgextra/i1/421748019/O1CN018okFQL296keWIE5i2_!!421748019.jpg",
-              "//img.alicdn.com/imgextra/i3/421748019/O1CN01LDwEQZ296keSWUMIW_!!421748019.jpg",
-              "//img.alicdn.com/imgextra/i4/421748019/O1CN014y6n0A296keQ9Tqr8_!!421748019.jpg",
-            ],
-            cat: ["装饰", "家用"],
-            label: ["618大促", "满100立减99"],
-            id: "94dac2ad28d8",
-            time: 1622720155980,
-            status: 1,
-          },
-          {
-            title:
-              "杯具熊玻璃杯双层可爱花茶杯子办公室女水杯泡茶杯男夏季带盖防烫",
-            price: 78,
-            stock: 100,
-            cover:
-              "//gw.alicdn.com/bao/uploaded/i2/2938416728/O1CN01PbB2Ve1zZTPETAnpj_!!0-item_pic.jpg_320x320q90.jpg_.webp",
-            gallery: [
-              "https://img.alicdn.com/imgextra/i1/2938416728/O1CN01nCgvo71zZTPUefRDX_!!2938416728.jpg_640x640q80_.webp",
-              "https://img.alicdn.com/imgextra/i1/2938416728/O1CN016SRFyk1zZTPemyWWj_!!2938416728.jpg_640x640q80_.webp",
-              "https://img.alicdn.com/imgextra/i4/2938416728/O1CN019G0O6O1zZTPfx8QpR_!!2938416728.jpg_640x640q80_.webp",
-            ],
-            detail: [
-              "//img.alicdn.com/imgextra/i2/2938416728/O1CN017c8uTJ1zZTIk9vF8n_!!2938416728.jpg",
-              "//img.alicdn.com/imgextra/i3/2938416728/O1CN014hynNX1zZTOfidhNY_!!2938416728.jpg",
-              "//img.alicdn.com/imgextra/i1/2938416728/O1CN014alG2q1zZTOcPbzP3_!!2938416728.jpg",
-              "//img.alicdn.com/imgextra/i1/2938416728/O1CN01BVX0q51zZTG58q6af_!!2938416728.jpg",
-            ],
-            cat: ["装饰", "家用"],
-            label: ["618大促", "满100立减99"],
-            id: "cb8f12ff0191",
-            time: 1622720023762,
-            status: 1,
-          },
-        ],
-      },
+      rows: [],
     };
   },
   methods: {
+        handleCheckDetail(id) {
+      this.$router.push({ name: "Detail", query: { id } });
+    },
     //改变input数字
     changeNumber(index) {
       var number = document.getElementsByTagName("input")[index].value;
-      this.list.rows[index].number = parseInt(number);
+      this.rows[index].number = parseInt(number);
       this.sumPrice();
       this.$forceUpdate();
     },
     //判断是否全选
     allChoose() {
-      for (var i in this.list.rows) {
-        if (this.list.rows[i].choose == false) {
+      for (var i in this.rows) {
+        if (this.rows[i].choose == false) {
           return false;
         }
       }
-      if (this.list.rows.length == 0) {
+      if (this.rows.length == 0) {
         return false;
       }
       return true;
@@ -183,7 +136,7 @@ export default {
     //判断是否有商品选中
     IshaveGood() {
       var sum = 0;
-      for (var i of this.list.rows) {
+      for (var i of this.rows) {
         if (i.choose == true) {
           sum++;
         }
@@ -192,62 +145,69 @@ export default {
     },
     //切换选中
     choose(index) {
-      this.list.rows[index].choose = !this.list.rows[index].choose;
+      this.rows[index].choose = !this.rows[index].choose;
       this.$forceUpdate();
     },
     setNumber() {
-      for (var i of this.list.rows) {
+      for (var i of this.rows) {
         i["number"] = 1;
         i["choose"] = false;
       }
     },
     //加减商品数量
     jian(index) {
-      if (this.list.rows[index].number >= 2) {
-        this.list.rows[index].number--;
+      if (this.rows[index].number >= 2) {
+        this.rows[index].number--;
       }
       this.$forceUpdate();
     },
     jia(index) {
-      this.list.rows[index].number++;
+      this.rows[index].number++;
       this.$forceUpdate();
     },
     //删除商品
     removeItem() {
-      var temp = [];
-      for (var i in this.list.rows) {
-        if (this.list.rows[i].choose == true) {
+      let temp = [];
+      let ids = [];
+      for (let i in this.rows) {
+        if (this.rows[i].choose == true) {
           temp.push(i);
+          ids.push(this.rows[i].id);
         }
+        
       }
-      temp = temp.reverse();
-      for (var j of temp) {
-        this.list.rows.splice(j, 1);
-      }
+      
+      this.$axios.post("/api/cart/remove", { ids }).then(() => {
+        temp = temp.reverse();
+        for (var j of temp) {
+          this.rows.splice(j, 1);
+        }
+      });
+
       this.$forceUpdate();
     },
     //计算商品价格
     sumPrice() {
       var sum = 0;
-      for (var i in this.list.rows) {
-        if (this.list.rows[i].choose == true) {
-          sum += this.list.rows[i].price * this.list.rows[i].number;
+      for (var i in this.rows) {
+        if (this.rows[i].choose == true) {
+          sum += this.rows[i].price * this.rows[i].number;
         }
       }
       return parseFloat(sum).toFixed(2);
     },
     //全选
     chooseAll() {
-      for (var i in this.list.rows) {
-        this.list.rows[i].choose = true;
+      for (var i in this.rows) {
+        this.rows[i].choose = true;
       }
       this.allChoose();
       this.$forceUpdate();
     },
     //全不选
     RemoveAll() {
-      for (var i in this.list.rows) {
-        this.list.rows[i].choose = false;
+      for (var i in this.rows) {
+        this.rows[i].choose = false;
       }
       this.allChoose();
       this.$forceUpdate();

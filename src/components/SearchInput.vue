@@ -10,10 +10,11 @@
 <script>
 export default {
   name: "SearchInput",
-
   props:{
     backColor:String,
-    model:String,
+  },
+  created(){
+    this.keyword=this.$store.getters.getKeyword;
   },
   data(){
     return{
@@ -29,6 +30,7 @@ export default {
   watch:{
     'keyword':function(newVal){
       this.$emit("inputUpdate",newVal);
+      this.$store.commit("setKeyword",newVal);
     }
   }
 };

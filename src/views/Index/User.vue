@@ -1,23 +1,24 @@
 <template>
   <div class="user">
     <div class="avatar">
-      <img
-        :src="userInfo.avatar"
-        alt=""
-      />
+      <img :src="userInfo.avatar" alt="" />
     </div>
-    <div class="name">{{userInfo.nickname}}</div>
-    <div class="favorite button">
+    <div class="name">{{ userInfo.nickname }}</div>
+    <div class="favorite button" @click="handleCollect">
       <div>我的收藏</div>
     </div>
     <div class="exit button" @click="handleLogout">
-      <div >退出登录</div>
+      <div>退出登录</div>
     </div>
     <div class="accept">
       <div class="title">已同意</div>
       <div class="tiaokuan">
-        <div class="yonghu">《用户协议》</div>
-        <div class="yinsi">《隐私条款》</div>
+        <router-link :to="{ name: 'Protocol' }" class="yonghu"
+          >《用户协议》</router-link
+        >
+        <router-link :to="{ name: 'Privacy' }" class="yinsi"
+          >《隐私条款》</router-link
+        >
       </div>
     </div>
   </div>
@@ -44,13 +45,18 @@ export default {
       userInfo: {},
     };
   },
-  methods:{
-    handleLogout(){
-      localStorage.removeItem("isLogin");
-      localStorage.removeItem("userInfo");
-      this.$router.push({name:"Login"})
-    }
-  }
+  methods: {
+    handleCollect(){
+      this.$router.push({name:'Favorite'})
+    },
+    handleLogout() {
+      this.$axios.post("/api/user/logout").then(() => {
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("userInfo");
+        this.$router.push({ name: "Login" });
+      });
+    },
+  },
 };
 </script>
 <style lang="less">

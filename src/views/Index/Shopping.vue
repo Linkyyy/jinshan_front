@@ -4,7 +4,6 @@
     <search-input
       :backColor="'transparent'"
       @clickSearch="handleClickSearch"
-      @inputUpdate="handleUpdetaInput"
     ></search-input>
     <swiper
       :imgList="imgList"
@@ -59,7 +58,6 @@ export default {
   },
   data() {
     return {
-      keyword: "",
       classificationList: [
         {
           img: require("../../assets/tv.png"),
@@ -120,16 +118,13 @@ export default {
   },
   methods: {
     handleClickSearch() {
-      this.$router.push({ name: "Search", query: { keyword: this.keyword } });
+      this.$router.push({ name: "Search"});
     },
     handleChooseClassfy(keyword) {
       this.$router.push({ name: "Classification", query: { keyword } });
     },
     handleCheckDetail(id) {
       this.$router.push({ name: "Detail", query: { id } });
-    },
-    handleUpdetaInput(newVal) {
-      this.keyword = newVal;
     },
   },
   updated(){
